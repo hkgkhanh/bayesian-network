@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác suất có điều kiện trong mạng Bayes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+    </header>
+
+    <main>
+        
+    </main>
+
+    <div id="addNodeFormContainer" class="draggable">
+        <label for="name">Tên Node:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="states">Trạng thái:</label>
+        <input type="text" id="states" name="states" placeholder="state1, state2, state3" required>
+        <br><br>
+        <label for="parents">Node cha:</label>
+        <select id="parents" name="parents">
+            <option value="" disabled selected>Chọn Node cha</option>
+            <!-- Các option sẽ được thêm vào từ JS -->
+        </select>
+        <br>
+        <ul id="selectedParents">
+            <!-- Các node cha đã chọn sẽ hiển thị tại đây -->
+        </ul>
+        <br>
+        <button type="submit" id="createNodeButton">Tạo Node</button>
+    </div>
+
+    <footer>
+    </footer>
+
+    <script src="scripts/dragElement.js"></script>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/Node.js"></script>
+</body>
+</html>
