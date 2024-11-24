@@ -14,12 +14,19 @@
         
     </main>
 
+    <div id="nodeDisplayContainer">
+        <!-- Các Node sẽ được hiển thị ở đây dưới dạng hình tròn -->
+    </div>
+
     <div id="addNodeFormContainer" class="draggable">
         <label for="name">Tên Node:</label>
         <input type="text" id="name" name="name" required>
         <br>
         <label for="states">Trạng thái:</label>
         <input type="text" id="states" name="states" placeholder="state1, state2, state3" required>
+        <br><br>
+        <input type="checkbox" id="dynamic" name="dynamic">
+        <label for="dynamic">Node động?</label>
         <br><br>
         <label for="parents">Node cha:</label>
         <select id="parents" name="parents">
@@ -33,6 +40,9 @@
         <br>
         <button type="submit" id="createNodeButton">Tạo Node</button>
     </div>
+
+    
+    
 
     <footer>
     </footer>

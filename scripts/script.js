@@ -81,15 +81,20 @@ createNodeButton.addEventListener("click", () => {
     }
 
     const states = statesInput.split(",").map((state) => state.trim());
+    const isDynamic = document.getElementById("dynamic").checked;
 
     // Tạo object Node
-    const newNode = new Node(name, states, parents);
+    const newNode = new Node(name, states, isDynamic, parents);
     console.log("Node mới được tạo:");
     newNode.displayNode();
 
     // Thêm node vào danh sách hiện có
     existingNodes.push(newNode);
     assignNodeId();
+
+    // Hiển thị các node dưới dạng hình tròn
+    document.getElementById("nodeDisplayContainer").innerHTML = "";
+    existingNodes.forEach(node => node.render());
 
     // Reset form sau khi tạo thành công
     document.getElementById("name").value = "";
@@ -106,4 +111,3 @@ function assignNodeId() {
 
 // Chạy hàm khởi tạo dropdown
 populateDropdown();
-
