@@ -1,20 +1,76 @@
-.body {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: #000000; /* Màu chữ trung tính */
+    background-color: #D6E5E3;
     margin: 0;
     padding: 0;
-    font-family: system-ui;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #9fd8cb; /* Màu nền */
+    padding: 10px 20px;
+    color: #000;
+}
+
+header .logo-subtext {
+    font-size: 14px; /* Kích thước chữ nhỏ */
+    color: rgb(0, 0, 0); /* Màu chữ */
+    margin-top: 5px; /* Khoảng cách từ logo xuống */
+    font-weight: normal;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #4f4f4f; /* Hiệu ứng khi hover */
+}
+
+footer {
+    text-align: center;
+    bottom: 0;
+    font-size: 14px; /* Kích thước chữ nhỏ */
+    color: #333; /* Màu chữ */
 }
 
 #addNodeFormContainer {
-    width: 400px;
-    background-color: #3498db;
-    color: white;
+    width: 300px;
+    background-color: #7de2d1;
+    color: rgb(0, 0, 0);
     border-radius: 8px;
     cursor: grab;
     position: absolute;
     /* top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); */
-    top: 10px;
+    top: 100px;
     right: 10px;
     user-select: none;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -31,8 +87,8 @@ label {
 }
 
 input {
-    width: 100%;
-    padding: 8px 0;
+    width: calc(100% - 12px);
+    padding: 8px 6px;
     margin-bottom: 10px;
     border: none;
     border-radius: 4px;
@@ -104,13 +160,13 @@ button:hover {
     position: relative; /* Cho phép chứa các div di chuyển */
     width: 50%;
     height: 400px; /* Cho phép chứa các node di chuyển */
-    border: 1px solid #c3c3c3;
+    border: 1px solid #000000;
     margin-top: 20px;
 }
 
 .node-circle {
-    background-color: #3498db;
-    color: white;
+    background-color: #bbec71;
+    color: rgb(0, 0, 0);
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,5 +1,19 @@
 // Dữ liệu ban đầu: Danh sách các node hiện có
 const existingNodes = [];
+var totalNodeCount = 0;
+
+let BenhCumNode = new BNNode(1, "Bệnh cúm", ["có", "không"], false, []);
+existingNodes.push(BenhCumNode);
+totalNodeCount++;
+
+let HoNode = new BNNode(2, "Ho", ["có", "không"], false, [1]);
+existingNodes.push(HoNode);
+totalNodeCount++;
+
+
+// Hiển thị các node dưới dạng hình tròn
+document.getElementById("nodeDisplayContainer").innerHTML = "";
+existingNodes.forEach(node => node.render());
 
 // Khởi tạo các thành phần
 const parentsSelect = document.getElementById("parents");
@@ -43,7 +57,15 @@ parentsSelect.addEventListener("change", () => {
     listItem.dataset.value = selectedValue;
 
     const nodeName = document.createElement("span");
-    nodeName.textContent = existingNodes[selectedValue].name;
+    // nodeName.textContent = existingNodes[selectedValue].name;
+    const selectedNode = existingNodes.find(node => node.id === parseInt(selectedValue));
+
+    if (selectedNode) {
+        // Cập nhật nội dung text cho nodeName
+        nodeName.textContent = selectedNode.name;
+    } else {
+        console.error("Không tìm thấy node với ID:", selectedValue);
+    }
 
     const removeButton = document.createElement("button");
     removeButton.textContent = "×"; // Nút nhỏ để xóa
@@ -60,7 +82,7 @@ parentsSelect.addEventListener("change", () => {
 
 // Lấy danh sách các node cha đã chọn
 function getSelectedParents() {
-    return [...selectedParentsList.children].map((li) => li.dataset.value);
+    return [...selectedParentsList.children].map((li) => parseInt(li.dataset.value));
 }   
 
 // Xử lý khi nhấn nút "Tạo Node"
@@ -81,16 +103,20 @@ createNodeButton.addEventListener("click", () => {
     }
 
     const states = statesInput.split(",").map((state) => state.trim());
+
+    const statesSet = new Set(states);
+    if (statesSet.size !== states.length) {
+        alert("Có trạng thái trùng lặp! Vui lòng kiểm tra lại.");
+        return;
+    }
+
     const isDynamic = document.getElementById("dynamic").checked;
+    totalNodeCount++; // sẽ trở thành id của Node
 
     // Tạo object Node
-    const newNode = new Node(name, states, isDynamic, parents);
-    console.log("Node mới được tạo:");
-    newNode.displayNode();
-
-    // Thêm node vào danh sách hiện có
+    const newNode = new BNNode(totalNodeCount, name, states, isDynamic, parents);
     existingNodes.push(newNode);
-    assignNodeId();
+    // assignNodeId();
 
     // Hiển thị các node dưới dạng hình tròn
     document.getElementById("nodeDisplayContainer").innerHTML = "";

@@ -1,28 +1,20 @@
-class Node {
-    constructor(name, states, isDynamic, parents) {
-        this.id = 0;
+class BNNode {
+    constructor(id, name, states, isDynamic, parents) {
+        this.id = id;
         this.name = name;
         this.states = states;
         this.isDynamic = isDynamic;
         this.parentNodes = parents;
         this.x = 50;
         this.y = 50;
-        this.d = 50;
-    }
-
-    // Phương thức hiển thị node thông qua console
-    displayNode() {
-        const parentNames = this.parentNodes.map(parentId => existingNodes[parentId].name).join(", ");
-        console.log(`Node: ${this.name}`);
-        console.log(`States: ${this.states.join(", ")}`);
-        console.log(`Parents: ${parentNames || "Không có node cha"}`);
+        this.d = 70;
     }
 
     // Phương thức để vẽ node dưới dạng hình tròn
     render() {
         const nodeCircle = document.createElement("div");
         nodeCircle.classList.add("node-circle");
-        nodeCircle.textContent = this.name;
+        nodeCircle.textContent = this.name + (this.isDynamic ? " (d)" : "");
 
         nodeCircle.style.left = `${this.x}px`;
         nodeCircle.style.top = `${this.y}px`;
@@ -69,7 +61,7 @@ class Node {
     drawArrow() {
         const container = document.getElementById("nodeDisplayContainer");
         this.parentNodes.forEach(parentNodeId => {
-            const parentNode = existingNodes[parentNodeId]; // Lấy đối tượng node cha
+            const parentNode = existingNodes.find(node => node.id === parentNodeId);
             const arrow = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             arrow.setAttribute("width", "100%");
             arrow.setAttribute("height", "100%");
