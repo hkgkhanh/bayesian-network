@@ -60,6 +60,66 @@ footer {
     color: #333; /* Màu chữ */
 }
 
+/* Định dạng tooltip */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 250px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Hiển thị tooltip phía trên */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Mũi tên nhỏ phía dưới tooltip */
+.tooltip .tooltip-text::after {
+    content: '';
+    position: absolute;
+    top: 100%; /* Đặt mũi tên phía dưới tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+/* Hiển thị tooltip khi hover */
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+#guide-container {
+    position: relative;
+    margin: 20px auto;
+    padding: 15px;
+    width: 90%;
+    max-width: 600px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: justify;
+}
+
+#guide-container h2 {
+    text-align: center;
+}
+
 #addNodeFormContainer {
     width: 300px;
     background-color: #7de2d1;

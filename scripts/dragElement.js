@@ -25,3 +25,15 @@ document.addEventListener("mouseup", () => {
     isDragging = false;
     addNodeFormContainer.style.cursor = "grab";
 });
+
+// JavaScript để toggle phần Hướng dẫn sử dụng
+document.getElementById("toggle-guide").addEventListener("click", function (e) {
+    e.preventDefault();
+    const guideContainer = document.getElementById("guide-container");
+    
+    if (guideContainer.style.display === "none") {
+        guideContainer.style.display = "block";
+    } else {
+        guideContainer.style.display = "none";
+    }
+});

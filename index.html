@@ -14,17 +14,11 @@
         </div>
         <nav>
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Hướng dẫn sử dụng</a></li>
+                <li><a href="" id="toggle-guide">Hướng dẫn sử dụng</a></li>
                 <li><a href="https://github.com/hkgkhanh/bayesian-network" target="_blank">Github</a></li>
             </ul>
         </nav>
     </header>
-
-    <main>
-        
-    </main>
 
     <div id="nodeDisplayContainer">
         <!-- Các Node sẽ được hiển thị ở đây dưới dạng hình tròn -->
@@ -37,8 +31,11 @@
         <label for="states">Trạng thái:</label>
         <input type="text" id="states" name="states" placeholder="state1, state2, state3" required>
         <br><br>
-        <input type="checkbox" id="dynamic" name="dynamic">
-        <label for="dynamic">Node động?</label>
+        <div class="tooltip">
+            <input type="checkbox" id="dynamic" name="dynamic">
+            <label for="dynamic">Node động?</label>
+            <span class="tooltip-text">Trạng thái của node tại thời điểm t phụ thuộc vào giá trị của chính nó tại thời điểm t-1</span>
+        </div>
         <br><br>
         <label for="parents">Node cha:</label>
         <select id="parents" name="parents">
@@ -53,7 +50,10 @@
         <button type="submit" id="createNodeButton">Tạo Node</button>
     </div>
 
-    
+    <div id="guide-container" style="display: none;">
+        <h2>Hướng dẫn sử dụng</h2>
+        <p>Đây là phần hướng dẫn sử dụng mạng Bayes trong ứng dụng này...</p>
+    </div>
     
 
     <footer>
