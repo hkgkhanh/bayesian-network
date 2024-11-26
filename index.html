@@ -25,11 +25,12 @@
     </div>
 
     <div id="addNodeFormContainer" class="draggable">
+        <h3 style="text-align: center;">Bước 1: Xây dựng mạng Bayes</h3>
         <label for="name">Tên Node:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name">
         <br>
         <label for="states">Trạng thái:</label>
-        <input type="text" id="states" name="states" placeholder="state1, state2, state3" required>
+        <input type="text" id="states" name="states" placeholder="state1, state2, state3">
         <br><br>
         <div class="tooltip">
             <input type="checkbox" id="dynamic" name="dynamic">
@@ -48,6 +49,34 @@
         </ul>
         <br>
         <button type="submit" id="createNodeButton">Tạo Node</button>
+    </div>
+
+    <div id="editNodeFormContainer" class="draggable">
+        <h3 style="text-align: center;">Sửa thông tin node</h3>
+        <label for="editname">Tên Node:</label>
+        <input type="text" id="editname" name="editname">
+        <br>
+        <label for="editstates">Trạng thái:</label>
+        <input type="text" id="editstates" name="editstates" placeholder="state1, state2, state3">
+        <br><br>
+        <div class="tooltip">
+            <input type="checkbox" id="editdynamic" name="editdynamic">
+            <label for="editdynamic">Node động?</label>
+            <span class="tooltip-text">Trạng thái của node tại thời điểm t phụ thuộc vào giá trị của chính nó tại thời điểm t-1</span>
+        </div>
+        <br><br>
+        <label for="editparents">Node cha:</label>
+        <select id="editparents" name="editparents">
+            <option value="" disabled selected>Chọn Node cha</option>
+            <!-- Các option sẽ được thêm vào từ js -->
+        </select>
+        <br>
+        <ul id="editselectedParents">
+            <!-- Các node cha đã chọn sẽ hiển thị tại đây -->
+        </ul>
+        <br>
+        <button type="submit" id="editNodeButton">Sửa Node</button>
+        <button type="submit" id="canceleditNodeButton">Hủy</button>
     </div>
 
     <div id="guide-container" style="display: none;">

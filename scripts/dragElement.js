@@ -37,3 +37,8 @@ document.getElementById("toggle-guide").addEventListener("click", function (e) {
         guideContainer.style.display = "none";
     }
 });
+
+document.getElementById("canceleditNodeButton").addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("editNodeFormContainer").style.display = "none";
+});

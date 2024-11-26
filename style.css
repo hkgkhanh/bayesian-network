@@ -131,7 +131,7 @@ footer {
     left: 50%;
     transform: translate(-50%, -50%); */
     top: 100px;
-    right: 10px;
+    left: 610px;
     user-select: none;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     padding: 8px;
@@ -218,7 +218,7 @@ button:hover {
 
 #nodeDisplayContainer {
     position: relative; /* Cho phép chứa các div di chuyển */
-    width: 50%;
+    width: 600px;
     height: 400px; /* Cho phép chứa các node di chuyển */
     border: 1px solid #000000;
     margin-top: 20px;
@@ -237,4 +237,63 @@ button:hover {
     position: absolute; /* Để có thể di chuyển tự do */
     user-select: none; /* Ngăn không cho chọn văn bản khi kéo */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#editNodeFormContainer {
+    display: none;
+    position: fixed;
+    top: 100px;
+    right: 10px;
+    width: 300px;
+    padding: 8px;
+    background: #7de2d1;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+#editNodeFormContainer button {
+    width: calc(50% - 4px);
+}
+
+#canceleditNodeButton {
+    background-color: #cd4536;
+}
+
+#editselectedParents {
+    display: flex; /* Hiển thị các phần tử trên một dòng */
+    flex-wrap: wrap; /* Cho phép xuống dòng nếu danh sách quá dài */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#editselectedParents li {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* Khoảng cách giữa các node */
+    margin-bottom: 10px; /* Khoảng cách nếu xuống dòng */
+    background-color: #f1f1f1;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#editselectedParents li span {
+    margin-right: 5px; /* Khoảng cách giữa tên node và nút xóa */
+}
+
+#editselectedParents li button {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
 }

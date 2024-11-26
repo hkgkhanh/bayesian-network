@@ -50,6 +50,130 @@ class BNNode {
             document.addEventListener("mouseup", onMouseUp);
         });
 
+        // hiển thị hộp thoại edit node khi click vào node
+        nodeCircle.addEventListener("click", function (e) {
+            // Hiển thị hộp thoại
+            const editNodeForm = document.getElementById("editNodeFormContainer");
+            editNodeForm.style.display = "block";
+
+            // Lấy ID của node hiện tại
+            const nodeName = this.innerHTML.replace(" (d)", "");
+            const nodeData = existingNodes.find(node => node.name === nodeName);
+            const nodeId = nodeData.id;
+            // console.log(nodeData);
+
+            if (!nodeData) {
+                console.error("Không tìm thấy node!");
+                return;
+            }
+
+            // Điền giá trị vào form
+            document.getElementById("editname").value = nodeData.name;
+            document.getElementById("editstates").value = nodeData.states.join(", ");
+            document.getElementById("editdynamic").checked = nodeData.isDynamic;
+
+            // Xóa các node cha hiện tại trong danh sách và thêm lại
+            const editselectedParents = document.getElementById("editselectedParents");
+            editselectedParents.innerHTML = ""; // Xóa danh sách cũ
+            nodeData.parentNodes.forEach(parentId => {
+                const parentNode = existingNodes.find(node => node.id === parentId);
+                if (parentNode) {
+                    const listItem = document.createElement("li");
+                    listItem.dataset.value = parentNode.id;
+
+                    const nodeName = document.createElement("span");
+                    // nodeName.textContent = existingNodes[selectedValue].name;
+                    const selectedNode = existingNodes.find(node => node.id === parseInt(parentNode.id));
+
+                    if (selectedNode) {
+                        // Cập nhật nội dung text cho nodeName
+                        nodeName.textContent = selectedNode.name;
+                    } else {
+                        console.error("Không tìm thấy node với ID:", parentNode.id);
+                    }
+
+                    const removeButton = document.createElement("button");
+                    removeButton.textContent = "×"; // Nút nhỏ để xóa
+                    removeButton.title = "Xóa Node này";
+                    removeButton.addEventListener("click", () => {
+                        listItem.remove(); // Xóa node khỏi danh sách
+                    });
+
+                    listItem.appendChild(nodeName);
+                    listItem.appendChild(removeButton);
+                    editselectedParents.appendChild(listItem);
+                }
+            });
+
+            // Cập nhật danh sách chọn (dropdown) cho Node cha
+            const editparentsSelect = document.getElementById("editparents");
+            editparentsSelect.innerHTML = '<option value="" disabled selected>Chọn Node cha</option>';
+            existingNodes.forEach(node => {
+                if (node.id !== nodeId) { // Không thêm chính nó làm node cha
+                    const option = document.createElement("option");
+                    option.value = node.id;
+                    option.textContent = node.name;
+                    editparentsSelect.appendChild(option);
+                }
+            });
+
+            editparentsSelect.addEventListener("change", () => {
+                const selectedValue = editparentsSelect.value;
+            
+                // Kiểm tra nếu node đã được chọn trước đó
+                if ([...editselectedParents.children].some((li) => li.dataset.value === selectedValue)) return;
+            
+                // Tạo item danh sách hiển thị
+                const listItem = document.createElement("li");
+                listItem.dataset.value = selectedValue;
+            
+                const nodeName = document.createElement("span");
+                const selectedNode = existingNodes.find(node => node.id === parseInt(selectedValue));
+            
+                if (selectedNode) {
+                    // Cập nhật nội dung text cho nodeName
+                    nodeName.textContent = selectedNode.name;
+                } else {
+                    console.error("Không tìm thấy node với ID:", selectedValue);
+                }
+            
+                const removeButton = document.createElement("button");
+                removeButton.textContent = "×"; // Nút nhỏ để xóa
+                removeButton.title = "Xóa Node này";
+                removeButton.addEventListener("click", () => {
+                    listItem.remove(); // Xóa node khỏi danh sách
+                });
+            
+                listItem.appendChild(nodeName);
+                listItem.appendChild(removeButton);
+                editselectedParents.appendChild(listItem);
+            });
+
+            // Xử lý sự kiện nhấn nút "Sửa Node"
+            const editButton = document.getElementById("editNodeButton");
+            editButton.onclick = () => {
+                // Lấy giá trị từ form
+                const updatedName = document.getElementById("editname").value;
+                const updatedStates = document.getElementById("editstates").value.split(",").map(s => s.trim());
+                const isDynamic = document.getElementById("editdynamic").checked;
+
+                // Cập nhật node
+                nodeData.name = updatedName;
+                nodeData.states = updatedStates;
+                nodeData.isDynamic = isDynamic;
+                this.innerHTML = nodeData.name + (nodeData.isDynamic ? " (d)" : "");
+
+                // Cập nhật danh sách node cha
+                nodeData.parentNodes = [...editselectedParents.children].map((li) => parseInt(li.dataset.value));
+
+                // Ẩn hộp thoại sau khi sửa
+                editNodeForm.style.display = "none";
+
+                // console.log("Node đã được cập nhật:", nodeData);
+                nodeData.drawArrow();
+            };
+        });
+
         // Thêm node vào container
         const container = document.getElementById("nodeDisplayContainer");
         container.appendChild(nodeCircle);
