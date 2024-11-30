@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
+::-webkit-scrollbar {
+    display:none;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
@@ -120,7 +124,7 @@ footer {
     text-align: center;
 }
 
-#addNodeFormContainer {
+#addNodeFormContainer, #inputDataContainer {
     width: 300px;
     background-color: #7de2d1;
     color: rgb(0, 0, 0);
@@ -167,6 +171,7 @@ input[type="checkbox"] {
 button {
     width: 100%;
     padding: 10px;
+    margin: 5px 0;
     border: none;
     border-radius: 4px;
     background-color: #2ecc71;

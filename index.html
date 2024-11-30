@@ -49,6 +49,16 @@
         </ul>
         <br>
         <button type="submit" id="createNodeButton">Tạo Node</button>
+        <button type="submit" id="inputDataButton">Nhập dữ liệu</button>
+    </div>
+
+    <div id="inputDataContainer" class="draggable" style="display: none">
+        <h3 style="text-align: center;">Bước 2: Nhập dữ liệu</h3>
+        <pre id="output"></pre>
+        <p>n = <span id="numDatapoint">0</span></p>
+        <input type="file" id="csvFileInput" accept=".csv">
+        <button type="submit" id="backToCreateNodeButton">Quay lại bước 1</button>
+        <button type="submit" id="inputDataButton">Tính toán và hiển thị kết quả</button>
     </div>
 
     <div id="editNodeFormContainer" class="draggable">
@@ -88,6 +98,8 @@
     <footer>
     </footer>
 
+    <script src="scripts/utf8.js"></script>
+    <script src="scripts/csvRead.js"></script>
     <script src="scripts/dragElement.js"></script>
     <script src="scripts/BNNode.js"></script>
     <script src="scripts/script.js"></script>

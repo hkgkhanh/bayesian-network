@@ -42,3 +42,15 @@ document.getElementById("canceleditNodeButton").addEventListener("click", functi
     e.preventDefault();
     document.getElementById("editNodeFormContainer").style.display = "none";
 });
+
+document.getElementById("inputDataButton").addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("inputDataContainer").style.display = "block";
+    addNodeFormContainer.style.display = "none";
+});
+
+document.getElementById("backToCreateNodeButton").addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("inputDataContainer").style.display = "none";
+    addNodeFormContainer.style.display = "block";
+});

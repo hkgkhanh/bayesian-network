@@ -1,3 +1,5 @@
+let mouseDownTime = 0;
+
 class BNNode {
     constructor(id, name, states, isDynamic, parents) {
         this.id = id;
@@ -28,6 +30,7 @@ class BNNode {
             // Lưu lại vị trí con trỏ chuột khi bắt đầu kéo
             const offsetX = event.clientX - nodeCircle.offsetLeft;
             const offsetY = event.clientY - nodeCircle.offsetTop;
+            mouseDownTime = Date.now();
         
             // Di chuyển node khi kéo
             const onMouseMove = (event) => {
@@ -44,6 +47,16 @@ class BNNode {
             const onMouseUp = () => {
                 document.removeEventListener("mousemove", onMouseMove);
                 document.removeEventListener("mouseup", onMouseUp);
+
+                let mouseUpTime = Date.now();
+                let mouseHoldDuration = mouseUpTime - mouseDownTime;
+
+                if (mouseHoldDuration < 100) {
+                    const quickClickEvent = new CustomEvent("quickClick", {
+                    detail: {duration: mouseHoldDuration},
+                    });
+                    nodeCircle.dispatchEvent(quickClickEvent);
+                }
             };
         
             document.addEventListener("mousemove", onMouseMove);
@@ -51,7 +64,7 @@ class BNNode {
         });
 
         // hiển thị hộp thoại edit node khi click vào node
-        nodeCircle.addEventListener("click", function (e) {
+        nodeCircle.addEventListener("quickClick", function (e) {
             // Hiển thị hộp thoại
             const editNodeForm = document.getElementById("editNodeFormContainer");
             editNodeForm.style.display = "block";
