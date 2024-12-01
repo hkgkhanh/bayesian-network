@@ -54,3 +54,8 @@ document.getElementById("backToCreateNodeButton").addEventListener("click", func
     document.getElementById("inputDataContainer").style.display = "none";
     addNodeFormContainer.style.display = "block";
 });
+
+document.getElementById("submitDataButton").addEventListener("click", function (e) {
+    e.preventDefault();
+    processCalcProbs();
+});
