@@ -23,9 +23,33 @@ function getProbWithCond(nodeName, nodeState, parentName, parentState) {
     for (let i = 1; i < nodesData.length; i++) {
         if (nodesData[i][parentIndex] == parentState) {
             numDataPoint++;
-            continue;
         }
-        if (nodesData[i][nodeIndex] == nodeState) stateCount++;
+    }
+
+    for (let i = 1; i < nodesData.length; i++) {
+        if (nodesData[i][parentIndex] == parentState && nodesData[i][nodeIndex] == nodeState) {
+            stateCount++;
+        }
+    }
+
+    return stateCount / numDataPoint;
+}
+
+// hàm tính xác suất của những node động
+function getProbDynamic(nodeIndex, currState, prevState) {
+    let numDataPoint = 0;
+    let stateCount = 0;
+
+    for (let i = 1; i < nodesData.length - 1; i++) {
+        if (nodesData[i][nodeIndex] == prevState) {
+            numDataPoint++;
+        }
+    }
+
+    for (let i = 2; i < nodesData.length; i++) {
+        if (nodesData[i][nodeIndex] == currState && nodesData[i - 1][nodeIndex] == prevState) {
+            stateCount++;
+        }
     }
 
     return stateCount / numDataPoint;
@@ -35,6 +59,39 @@ function getProbWithCond(nodeName, nodeState, parentName, parentState) {
 function processCalcProbs() {
     document.getElementById("resultDisplayContainer").innerHTML = "";
     for (let i = 0; i < existingNodes.length; i++) {
+
+        if (existingNodes[i].isDynamic == true) {
+            let table = document.createElement("table");
+            table.setAttribute('border', '1');
+            table.style.borderCollapse = "collapse";
+            table.style.textAlign = "center";
+
+            // Tạo bảng tiêu đề (dòng đầu tiên)
+            const headerRow = table.insertRow();
+            headerRow.appendChild(document.createElement('th'));
+            existingNodes[i].states.forEach(state => {
+                const th = document.createElement('th');
+                th.textContent = existingNodes[i].name + "(t) = " + state;
+                headerRow.appendChild(th);
+            });
+
+            // duyệt qua từng state của parent
+            let prevStates = existingNodes[i].states;
+            prevStates.forEach(prevState => {
+                let row = table.insertRow();
+                let prevStateCell = document.createElement('td');
+                prevStateCell.textContent = existingNodes[i].name + "(t-1) = " + prevState;
+                row.appendChild(prevStateCell);
+
+                existingNodes[i].states.forEach(currState => {
+                    const td = document.createElement('td');
+                    td.textContent = getProbDynamic(i, currState, prevState);
+                    row.appendChild(td);
+                });
+            });
+
+            document.getElementById("resultDisplayContainer").appendChild(table);
+        }
 
         if (existingNodes[i].parentNodes.length == 0) {
             let table = document.createElement("table");
