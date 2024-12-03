@@ -5,7 +5,7 @@
 } */
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Arial', sans-serif;
     font-size: 16px;
     color: #000000; /* Màu chữ trung tính */
     background-color: #D6E5E3;
@@ -325,10 +325,24 @@ input[type="file"] {
     cursor: pointer;
 }
 
+#resultDisplayContainer {
+    overflow: auto;
+}
+
 #resultDisplayContainer table {
     margin: 4px;
 }
 
 #resultDisplayContainer table td, #resultDisplayContainer table th {
     padding: 4px;
+}
+
+#selectProbContainer select {
+    appearance: none;
+    background-color: none;
+    border: 1px solid #caced1;
+    border-radius: 0.25rem;
+    color: #000;
+    cursor: pointer;
+    margin: 0 4px;
 }

@@ -2,12 +2,16 @@
 const existingNodes = [];
 var totalNodeCount = 0;
 
-let BenhCumNode = new BNNode(1, "Bệnh cúm", ["có", "không"], false, []);
+let BenhCumNode = new BNNode(1, "Bệnh cúm", ["có", "không", "không biết"], false, [2, 3]);
 existingNodes.push(BenhCumNode);
 totalNodeCount++;
 
-let HoNode = new BNNode(2, "Ho", ["có", "không"], false, [1]);
+let HoNode = new BNNode(2, "Ho", ["có", "không", "không biết"], false, []);
 existingNodes.push(HoNode);
+totalNodeCount++;
+
+let khoThoNode = new BNNode(3, "Khó thở", ["có", "không", "không biết"], true, []);
+existingNodes.push(khoThoNode);
 totalNodeCount++;
 
 
