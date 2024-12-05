@@ -1,6 +1,6 @@
 # bayesian-network
 Đồ án môn Project 1 (GVHD: Vũ Thị Hương Giang)
-Tính toán xác suất có điều kiện trong mạng Bayes
+## Tính toán xác suất có điều kiện trong mạng Bayes
 
 Hướng dẫn sử dụng
 -----------------
