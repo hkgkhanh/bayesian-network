@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác suất có điều kiện trong mạng Bayes</title>
+    <link rel="stylesheet" href="newstyle.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            Xác suất có điều kiện trong mạng Bayes<br>
+            <p class="logo-subtext">Nông Quốc Khánh - SoICT - HUST</p>
+        </div>
+        <nav>
+            <a href="" id="toggle-about">Giới thiệu</a>
+            <a href="" id="toggle-guide">Hướng dẫn</a>
+            <a href="https://github.com/hkgkhanh/bayesian-network" target="_blank">Github</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id="nodeDisplayContainer"></div>
+
+        <div id="addNodeFormContainer">
+            <h3 style="text-align: center;">Bước 1: Xây dựng mạng Bayes</h3>
+            <label for="name">Tên Node:</label>
+            <input type="text" id="name" name="name">
+            <br>
+            <label for="states">Trạng thái:</label>
+            <input type="text" id="states" name="states" placeholder="state1, state2, state3">
+            <br><br>
+            <div class="tooltip">
+                <input type="checkbox" id="dynamic" name="dynamic">
+                <label for="dynamic">Node động?</label>
+                <span class="tooltip-text">Trạng thái của node tại thời điểm t phụ thuộc vào giá trị của chính nó tại thời điểm t-1</span>
+            </div>
+            <br><br>
+            <label for="parents">Node cha:</label>
+            <select id="parents" name="parents">
+                <option value="" disabled selected>Chọn Node cha</option>
+                
+            </select>
+            <br>
+            <ul id="selectedParents">
+                
+            </ul>
+            <br>
+            <button type="submit" id="createNodeButton">Tạo Node</button>
+            <button type="submit" id="inputDataButton">Nhập dữ liệu</button>
+        </div>
+
+        <div id="inputDataContainer" style="display: none">
+            <h3 style="text-align: center;">Bước 2: Nhập dữ liệu</h3>
+            <pre id="output"></pre>
+            <p>n = <span id="numDatapoint">0</span></p>
+            <label for="csvFileInput" class="file-upload">Tải file .csv lên</label>
+            <input type="file" id="csvFileInput" accept=".csv">
+            <br>
+            <button type="submit" id="backToCreateNodeButton">Quay lại bước 1</button>
+            <button type="submit" id="submitDataButton">Xác nhận</button>
+        </div>
+
+        <div id="editNodeFormContainer" style="display: none;">
+            <h3 style="text-align: center;">Sửa thông tin node</h3>
+            <label for="editname">Tên Node:</label>
+            <input type="text" id="editname" name="editname">
+            <br>
+            <label for="editstates">Trạng thái:</label>
+            <input type="text" id="editstates" name="editstates" placeholder="state1, state2, state3">
+            <br><br>
+            <div class="tooltip">
+                <input type="checkbox" id="editdynamic" name="editdynamic">
+                <label for="editdynamic">Node động?</label>
+                <span class="tooltip-text">Trạng thái của node tại thời điểm t phụ thuộc vào giá trị của chính nó tại thời điểm t-1</span>
+            </div>
+            <br><br>
+            <label for="editparents">Node cha:</label>
+            <select id="editparents" name="editparents">
+                <option value="" disabled selected>Chọn Node cha</option>
+                
+            </select>
+            <br>
+            <ul id="editselectedParents">
+                
+            </ul>
+            <br>
+            <button type="submit" id="canceleditNodeButton">Hủy</button>
+            <button type="submit" id="editNodeButton">Sửa Node</button>
+        </div>
+
+        <div id="guide-container" style="display: none;">
+            <h2>Hướng dẫn sử dụng</h2>
+            <p>Đây là phần hướng dẫn sử dụng mạng Bayes trong ứng dụng này...</p>
+        </div>
+
+        <div id="resultDisplayContainer"></div>
+        <br>
+        <div id="selectProbContainer"></div>
+    </main>
+
+    <footer>
+    </footer>
+
+    <!-- <script src="scripts/utf8.js"></script> -->
+    <script src="scripts/csvRead.js"></script>
+    <script src="scripts/dragElement.js"></script>
+    <script src="scripts/BNNode.js"></script>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/calcProbs.js"></script>
+</body>
+</html>

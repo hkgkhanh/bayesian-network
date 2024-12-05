@@ -123,6 +123,8 @@ function calcSpecificProb(nodeID, conditions) {
 // tạo các bảng CPD (Conditional Probability Distribution)
 function processCalcProbs() {
     document.getElementById("resultDisplayContainer").innerHTML = "";
+    location.href = "#";
+    location.href = "#resultDisplayContainer";
     for (let i = 0; i < existingNodes.length; i++) {
 
         if (existingNodes[i].isDynamic == true) {
@@ -130,6 +132,7 @@ function processCalcProbs() {
             table.setAttribute('border', '1');
             table.style.borderCollapse = "collapse";
             table.style.textAlign = "center";
+            table.style.margin = "10px";
 
             // Tạo bảng tiêu đề (dòng đầu tiên)
             const headerRow = table.insertRow();
@@ -137,6 +140,7 @@ function processCalcProbs() {
             existingNodes[i].states.forEach(state => {
                 const th = document.createElement('th');
                 th.textContent = existingNodes[i].name + "(t) = " + state;
+                th.style.padding = "10px";
                 headerRow.appendChild(th);
             });
 
@@ -146,11 +150,13 @@ function processCalcProbs() {
                 let row = table.insertRow();
                 let prevStateCell = document.createElement('td');
                 prevStateCell.textContent = existingNodes[i].name + "(t-1) = " + prevState;
+                prevStateCell.style.padding = "10px";
                 row.appendChild(prevStateCell);
 
                 existingNodes[i].states.forEach(currState => {
                     const td = document.createElement('td');
                     td.textContent = getProbDynamic(i, currState, prevState);
+                    td.style.padding = "10px";
                     row.appendChild(td);
                 });
             });
@@ -163,12 +169,14 @@ function processCalcProbs() {
             table.setAttribute('border', '1');
             table.style.borderCollapse = "collapse";
             table.style.textAlign = "center";
+            table.style.margin = "10px";
 
             // Tạo bảng tiêu đề (dòng đầu tiên)
             const headerRow = table.insertRow();
             existingNodes[i].states.forEach(state => {
                 const th = document.createElement('th');
                 th.textContent = existingNodes[i].name + " = " + state;
+                th.style.padding = "10px";
                 headerRow.appendChild(th);
             });
 
@@ -176,6 +184,7 @@ function processCalcProbs() {
             existingNodes[i].states.forEach(state => {
                 let td = document.createElement('td');
                 td.textContent = getProbNoCond(existingNodes[i].name, state);
+                td.style.padding = "10px";
                 row.appendChild(td);
             });
 
@@ -189,6 +198,7 @@ function processCalcProbs() {
             table.setAttribute('border', '1');
             table.style.borderCollapse = "collapse";
             table.style.textAlign = "center";
+            table.style.margin = "10px";
 
             // Tạo bảng tiêu đề (dòng đầu tiên)
             const headerRow = table.insertRow();
@@ -196,6 +206,7 @@ function processCalcProbs() {
             existingNodes[i].states.forEach(state => {
                 const th = document.createElement('th');
                 th.textContent = existingNodes[i].name + " = " + state;
+                th.style.padding = "10px";
                 headerRow.appendChild(th);
             });
 
@@ -215,11 +226,13 @@ function processCalcProbs() {
                 let row = table.insertRow();
                 let parentStateCell = document.createElement('td');
                 parentStateCell.textContent = existingNodes[parentNodeIndex].name + " = " + parentState;
+                parentStateCell.style.padding = "10px";
                 row.appendChild(parentStateCell);
 
                 existingNodes[i].states.forEach(state => {
                     const td = document.createElement('td');
                     td.textContent = getProbWithCond(existingNodes[i].name, state, existingNodes[parentNodeIndex].name, parentState);
+                    td.style.padding = "10px";
                     row.appendChild(td);
                 });
             });
@@ -229,7 +242,7 @@ function processCalcProbs() {
     }
 
     //// SELECT ĐỂ XEM XÁC SUẤT CỦA 1 SỰ KIỆN CỤ THỂ
-    document.getElementById("selectProbContainer").innerHTML = "P(";
+    document.getElementById("selectProbContainer").innerHTML = "<br>Bạn có thể tính xác suất cho một sự kiện cụ thể:<br><br>P(";
 
     let select = document.createElement("select");
     select.id = "nodeSelectElement";

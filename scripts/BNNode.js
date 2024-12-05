@@ -66,8 +66,9 @@ class BNNode {
         // hiển thị hộp thoại edit node khi click vào node
         nodeCircle.addEventListener("quickClick", function (e) {
             // Hiển thị hộp thoại
+            document.getElementById("addNodeFormContainer").style.display = "none";
             const editNodeForm = document.getElementById("editNodeFormContainer");
-            editNodeForm.style.display = "block";
+            editNodeForm.style.display = "inline-block";
 
             // Lấy ID của node hiện tại
             const nodeName = this.innerHTML.replace(" (d)", "");
