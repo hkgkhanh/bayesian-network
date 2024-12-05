@@ -67,9 +67,7 @@ function calcSpecificProb(nodeID, conditions) {
         let interestedPrevState = conditions[1];
 
         for (let i = 2; i < nodesData.length; i++) {
-            // if (i > 1) {
-                if (interestedPrevState != "" && nodesData[i - 1][nodeIndex] != interestedPrevState) continue;
-            // }
+            if (interestedPrevState != "" && nodesData[i - 1][nodeIndex] != interestedPrevState) continue;
             let isValid = true;
 
             for (j = 2; j < conditions.length; j++) {
@@ -134,7 +132,6 @@ function processCalcProbs() {
             table.style.textAlign = "center";
             table.style.margin = "10px";
 
-            // Tạo bảng tiêu đề (dòng đầu tiên)
             const headerRow = table.insertRow();
             headerRow.appendChild(document.createElement('th'));
             existingNodes[i].states.forEach(state => {
@@ -171,7 +168,6 @@ function processCalcProbs() {
             table.style.textAlign = "center";
             table.style.margin = "10px";
 
-            // Tạo bảng tiêu đề (dòng đầu tiên)
             const headerRow = table.insertRow();
             existingNodes[i].states.forEach(state => {
                 const th = document.createElement('th');
@@ -200,7 +196,6 @@ function processCalcProbs() {
             table.style.textAlign = "center";
             table.style.margin = "10px";
 
-            // Tạo bảng tiêu đề (dòng đầu tiên)
             const headerRow = table.insertRow();
             headerRow.appendChild(document.createElement('th'));
             existingNodes[i].states.forEach(state => {

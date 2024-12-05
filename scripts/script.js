@@ -14,19 +14,15 @@ let khoThoNode = new BNNode(3, "Khó thở", ["có", "không", "không biết"],
 existingNodes.push(khoThoNode);
 totalNodeCount++;
 
-
-// Hiển thị các node dưới dạng hình tròn
 document.getElementById("nodeDisplayContainer").innerHTML = "";
 existingNodes.forEach(node => node.render());
 
-// Khởi tạo các thành phần
 const parentsSelect = document.getElementById("parents");
 const selectedParentsList = document.getElementById("selectedParents");
 const createNodeButton = document.getElementById("createNodeButton");
 
-// Hàm làm trống danh sách dropdown
 function clearDropdown() {
-    parentsSelect.innerHTML = ""; // Xóa tất cả các tùy chọn
+    parentsSelect.innerHTML = "";
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
     defaultOption.disabled = true;
@@ -35,7 +31,6 @@ function clearDropdown() {
     parentsSelect.appendChild(defaultOption);
 }
 
-// Tải các node vào dropdown
 function populateDropdown() {
     clearDropdown();
     existingNodes.forEach((node) => {
@@ -46,36 +41,31 @@ function populateDropdown() {
     });
 }
 
-// Thêm node cha đã chọn vào danh sách
 parentsSelect.addEventListener("change", () => {
     const selectedValue = parentsSelect.value;
 
-    // Kiểm tra nếu node đã được chọn trước đó
     if ([...selectedParentsList.children].some((li) => li.dataset.value === selectedValue)) {
         alert("Node này đã được chọn!");
         return;
     }
 
-    // Tạo item danh sách hiển thị
     const listItem = document.createElement("li");
     listItem.dataset.value = selectedValue;
 
     const nodeName = document.createElement("span");
-    // nodeName.textContent = existingNodes[selectedValue].name;
     const selectedNode = existingNodes.find(node => node.id === parseInt(selectedValue));
 
     if (selectedNode) {
-        // Cập nhật nội dung text cho nodeName
         nodeName.textContent = selectedNode.name;
     } else {
         console.error("Không tìm thấy node với ID:", selectedValue);
     }
 
     const removeButton = document.createElement("button");
-    removeButton.textContent = "×"; // Nút nhỏ để xóa
+    removeButton.textContent = "×";
     removeButton.title = "Xóa Node này";
     removeButton.addEventListener("click", () => {
-        listItem.remove(); // Xóa node khỏi danh sách
+        listItem.remove();
     });
 
     listItem.appendChild(nodeName);
@@ -84,18 +74,15 @@ parentsSelect.addEventListener("change", () => {
 });
 
 
-// Lấy danh sách các node cha đã chọn
 function getSelectedParents() {
     return [...selectedParentsList.children].map((li) => parseInt(li.dataset.value));
 }   
 
-// Xử lý khi nhấn nút "Tạo Node"
 createNodeButton.addEventListener("click", () => {
     const name = document.getElementById("name").value.trim();
     const statesInput = document.getElementById("states").value.trim();
     const parents = getSelectedParents();
 
-    // Kiểm tra dữ liệu đầu vào
     if (!name) {
         alert("Tên Node không được để trống!");
         return;
@@ -115,22 +102,18 @@ createNodeButton.addEventListener("click", () => {
     }
 
     const isDynamic = document.getElementById("dynamic").checked;
-    totalNodeCount++; // sẽ trở thành id của Node
+    totalNodeCount++;
 
-    // Tạo object Node
     const newNode = new BNNode(totalNodeCount, name, states, isDynamic, parents);
     existingNodes.push(newNode);
-    // assignNodeId();
 
-    // Hiển thị các node dưới dạng hình tròn
     document.getElementById("nodeDisplayContainer").innerHTML = "";
     existingNodes.forEach(node => node.render());
 
-    // Reset form sau khi tạo thành công
     document.getElementById("name").value = "";
     document.getElementById("states").value = "";
-    selectedParentsList.innerHTML = ""; // Xóa danh sách node cha đã chọn
-    populateDropdown(); // Chạy hàm khởi tạo dropdown
+    selectedParentsList.innerHTML = "";
+    populateDropdown();
 });
 
 function assignNodeId() {
@@ -139,5 +122,4 @@ function assignNodeId() {
     }
 }
 
-// Chạy hàm khởi tạo dropdown
 populateDropdown();

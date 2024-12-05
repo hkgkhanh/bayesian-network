@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xác suất có điều kiện trong mạng Bayes</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="newstyle.css">
 </head>
 <body>
     <header>
@@ -13,96 +13,118 @@
             <p class="logo-subtext">Nông Quốc Khánh - SoICT - HUST</p>
         </div>
         <nav>
-            <ul>
-                <li><a href="" id="toggle-guide">Hướng dẫn sử dụng</a></li>
-                <li><a href="https://github.com/hkgkhanh/bayesian-network" target="_blank">Github</a></li>
-            </ul>
+            <a href="" id="toggle-guide">Hướng dẫn</a>
+            <a href="https://github.com/hkgkhanh/bayesian-network" target="_blank">Github</a>
         </nav>
     </header>
 
-    <div id="nodeDisplayContainer">
-        <!-- Các Node sẽ được hiển thị ở đây dưới dạng hình tròn -->
-    </div>
+    <main>
+        <div id="nodeDisplayContainer"></div>
 
-    <div id="resultDisplayContainer"></div>
-    <div id="selectProbContainer"></div>
-
-    <div id="addNodeFormContainer" class="draggable">
-        <h3 style="text-align: center;">Bước 1: Xây dựng mạng Bayes</h3>
-        <label for="name">Tên Node:</label>
-        <input type="text" id="name" name="name">
-        <br>
-        <label for="states">Trạng thái:</label>
-        <input type="text" id="states" name="states" placeholder="state1, state2, state3">
-        <br><br>
-        <div class="tooltip">
-            <input type="checkbox" id="dynamic" name="dynamic">
-            <label for="dynamic">Node động?</label>
-            <span class="tooltip-text">Trạng thái của node tại thời điểm t phụ thuộc vào giá trị của chính nó tại thời điểm t-1</span>
+        <div id="addNodeFormContainer">
+            <h3 style="text-align: center;">Bước 1: Xây dựng mạng Bayes</h3>
+            <label for="name">Tên Node:</label>
+            <input type="text" id="name" name="name">
+            <br>
+            <label for="states">Trạng thái:</label>
+            <input type="text" id="states" name="states" placeholder="state1, state2, state3">
+            <br><br>
+            <div class="tooltip">
+                <input type="checkbox" id="dynamic" name="dynamic">
+                <label for="dynamic">Node động?</label>
+                <span class="tooltip-text">Trạng thái của node tại thời điểm t phụ thuộc vào giá trị của chính nó tại thời điểm t-1</span>
+            </div>
+            <br><br>
+            <label for="parents">Node cha:</label>
+            <select id="parents" name="parents">
+                <option value="" disabled selected>Chọn Node cha</option>
+                
+            </select>
+            <br>
+            <ul id="selectedParents">
+                
+            </ul>
+            <br>
+            <button type="submit" id="createNodeButton">Tạo Node</button>
+            <button type="submit" id="inputDataButton">Nhập dữ liệu</button>
         </div>
-        <br><br>
-        <label for="parents">Node cha:</label>
-        <select id="parents" name="parents">
-            <option value="" disabled selected>Chọn Node cha</option>
-            <!-- Các option sẽ được thêm vào từ js -->
-        </select>
-        <br>
-        <ul id="selectedParents">
-            <!-- Các node cha đã chọn sẽ hiển thị tại đây -->
-        </ul>
-        <br>
-        <button type="submit" id="createNodeButton">Tạo Node</button>
-        <button type="submit" id="inputDataButton">Nhập dữ liệu</button>
-    </div>
 
-    <div id="inputDataContainer" class="draggable" style="display: none">
-        <h3 style="text-align: center;">Bước 2: Nhập dữ liệu</h3>
-        <pre id="output"></pre>
-        <p>n = <span id="numDatapoint">0</span></p>
-        <label for="csvFileInput" class="file-upload">Tải file .csv lên</label>
-        <input type="file" id="csvFileInput" accept=".csv">
-        <button type="submit" id="backToCreateNodeButton">Quay lại bước 1</button>
-        <button type="submit" id="submitDataButton">Xác nhận</button>
-    </div>
-
-    <div id="editNodeFormContainer" class="draggable">
-        <h3 style="text-align: center;">Sửa thông tin node</h3>
-        <label for="editname">Tên Node:</label>
-        <input type="text" id="editname" name="editname">
-        <br>
-        <label for="editstates">Trạng thái:</label>
-        <input type="text" id="editstates" name="editstates" placeholder="state1, state2, state3">
-        <br><br>
-        <div class="tooltip">
-            <input type="checkbox" id="editdynamic" name="editdynamic">
-            <label for="editdynamic">Node động?</label>
-            <span class="tooltip-text">Trạng thái của node tại thời điểm t phụ thuộc vào giá trị của chính nó tại thời điểm t-1</span>
+        <div id="inputDataContainer" style="display: none">
+            <h3 style="text-align: center;">Bước 2: Nhập dữ liệu</h3>
+            <pre id="output"></pre>
+            <p>n = <span id="numDatapoint">0</span></p>
+            <label for="csvFileInput" class="file-upload">Tải file .csv lên</label>
+            <input type="file" id="csvFileInput" accept=".csv">
+            <br>
+            <button type="submit" id="backToCreateNodeButton">Quay lại bước 1</button>
+            <button type="submit" id="submitDataButton">Xác nhận</button>
         </div>
-        <br><br>
-        <label for="editparents">Node cha:</label>
-        <select id="editparents" name="editparents">
-            <option value="" disabled selected>Chọn Node cha</option>
-            <!-- Các option sẽ được thêm vào từ js -->
-        </select>
-        <br>
-        <ul id="editselectedParents">
-            <!-- Các node cha đã chọn sẽ hiển thị tại đây -->
-        </ul>
-        <br>
-        <button type="submit" id="editNodeButton">Sửa Node</button>
-        <button type="submit" id="canceleditNodeButton">Hủy</button>
-    </div>
 
-    <div id="guide-container" style="display: none;">
-        <h2>Hướng dẫn sử dụng</h2>
-        <p>Đây là phần hướng dẫn sử dụng mạng Bayes trong ứng dụng này...</p>
+        <div id="editNodeFormContainer" style="display: none;">
+            <h3 style="text-align: center;">Sửa thông tin node</h3>
+            <label for="editname">Tên Node:</label>
+            <input type="text" id="editname" name="editname">
+            <br>
+            <label for="editstates">Trạng thái:</label>
+            <input type="text" id="editstates" name="editstates" placeholder="state1, state2, state3">
+            <br><br>
+            <div class="tooltip">
+                <input type="checkbox" id="editdynamic" name="editdynamic">
+                <label for="editdynamic">Node động?</label>
+                <span class="tooltip-text">Trạng thái của node tại thời điểm t phụ thuộc vào giá trị của chính nó tại thời điểm t-1</span>
+            </div>
+            <br><br>
+            <label for="editparents">Node cha:</label>
+            <select id="editparents" name="editparents">
+                <option value="" disabled selected>Chọn Node cha</option>
+                
+            </select>
+            <br>
+            <ul id="editselectedParents">
+                
+            </ul>
+            <br>
+            <button type="submit" id="canceleditNodeButton">Hủy</button>
+            <button type="submit" id="editNodeButton">Sửa Node</button>
+        </div>
+
+        <div id="resultDisplayContainer"></div>
+        <br>
+        <div id="selectProbContainer"></div>
+    </main>
+
+    <div id="guideContainer" style="display: none;">
+        <div id="guideContent">
+            <span id="closeGuide">&times;</span>
+            <h2 style="text-align: center; position: sticky;">Hướng dẫn sử dụng</h2>
+            <div id="guideActualContent">
+                <p>Việc xây dựng và tính toán xác suất có điều kiện trong mạng Bayes được chia thành 3 bước:</p>
+                <h4>Bước 1: Xây dựng mạng Bayes</h4>
+                <p>Ứng dụng web cho phép người dùng khai báo các thông tin của Node, bao gồm:</p>
+                <ul>
+                    <li><b>Tên Node</b></li>
+                    <li><b>Các trạng thái có thể có của Node</b> (người dùng nhập vào các trạng thái ngăn cách nhau bởi dấu phẩy, các khoảng trắng và tab ở đầu và cuối mỗi trạng thái nếu có sẽ được tự động loại bỏ)</li>
+                    <li><b>Node tĩnh hay động</b> (Trạng thái hiện tại của Node có phụ thuộc vào trạng thái trước đó của chính nó hay không)</li>
+                    <li><b>Các Node cha của Node</b> (những Node mà trạng thái của chúng ảnh hưởng đến trạng thái của Node)</li>
+                </ul>
+                <p>Mỗi Node được tạo sẽ được hiển thị trên canvas, người dùng có thể kéo thả để mạng dễ nhìn hơn và có thể sửa lại thông tin của từng Node bằng cách click vào Node đó.</p>
+
+                <h4>Bước 2: Nhập dữ liệu</h4>
+                <p>Sau khi đã định nghĩa xong mạng Bayes, người dùng click vào nút Nhập dữ liệu. Tại đây người dùng tải lên file .csv, với dòng đầu tiên là tên các Node (không cần theo một thứ tự nhất định), các dòng tiếp theo là trạng thái của từng Node tương ứng.</p>
+                <p>2 trường hợp báo lỗi:</p>
+                <ul>
+                    <li>Có tên Node tồn tại trong dữ liệu không tồn tại trong mạng Bayes đã định nghĩa.</li>
+                    <li>Có trạng thái của Node trong dữ liệu không tồn tại trong danh sách các trạng thái đã được định nghĩa của Node đó.</li>
+                </ul>
+                <h4>Bước 3: Tính toán các bảng phân phối xác suất có điều kiện và xác suất cho một sự kiện cụ thể</h4>
+                <p>Sau khi đã nhập dữ liệu hợp lệ, người dùng click Xác nhận và hệ thống tự động tính toán các bảng phân phối xác suất có điều kiện (Conditional Probabilities Distribution table). Ngoài ra, người dùng có thể tùy chọn tính xác suất của một trạng thái của Node biết trạng thái của các Node cha của nó.</p>
+            </div>
+        </div>
     </div>
-    
 
     <footer>
     </footer>
 
-    <!-- <script src="scripts/utf8.js"></script> -->
     <script src="scripts/csvRead.js"></script>
     <script src="scripts/dragElement.js"></script>
     <script src="scripts/BNNode.js"></script>
