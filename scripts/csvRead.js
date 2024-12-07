@@ -1,5 +1,31 @@
 let nodesData;
 
+function convertToCSV(data) {
+    return data.map(row => row.join(",")).join("\n");
+}
+
+function downloadCSVProcess(filename, csvContent) {
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.id = "csvTemplate";
+
+    const label = document.createElement("label");
+    label.htmlFor = "csvTemplate";
+    label.className = "file-upload";
+    label.innerHTML = "Tải template_data.csv"
+    
+    document.getElementById("inputDataContainer").insertBefore(label, document.getElementById("csvInputLabel"));
+    document.getElementById("inputDataContainer").insertBefore(a, document.getElementById("csvInputLabel")) ;
+
+    label.addEventListener("click", function (e) {
+        a.click();
+    });
+}
+
 document.getElementById('csvFileInput').addEventListener('input', function (event) {
     const file = event.target.files[0];
     if (!file) return;

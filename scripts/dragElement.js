@@ -31,6 +31,11 @@ document.getElementById("inputDataButton").addEventListener("click", function (e
     e.preventDefault();
     document.getElementById("inputDataContainer").style.display = "inline-block";
     addNodeFormContainer.style.display = "none";
+
+    let headerRow = existingNodes.map(node => node.name);
+    let dataToCSV = [headerRow];
+    const templateCsvContent = "\uFEFF" + convertToCSV(dataToCSV); // cái uFEFF là để sửa lỗi font utf8
+    downloadCSVProcess("template_data.csv", templateCsvContent);
 });
 
 document.getElementById("backToCreateNodeButton").addEventListener("click", function (e) {
