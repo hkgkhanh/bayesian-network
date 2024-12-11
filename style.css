@@ -63,6 +63,7 @@ main {
     height: 600px;
     border: 1px solid #b1b1b1;
     margin: 10px 0;
+    left: 350px;
     display: inline-block;
 }
 
@@ -321,12 +322,12 @@ input[type="file"] {
     color: white;
 }
 
-#selectProbContainer {
+#selectProbContainer, #backwardSelectProbContainer {
     font-size: 20px;
     padding-bottom: 30px;
 }
 
-#selectProbContainer select {
+#selectProbContainer select, #backwardSelectProbContainer select {
     font-size: 20px;
     appearance: none;
     background: none;
@@ -337,7 +338,7 @@ input[type="file"] {
     padding: 0;
 }
 
-#selectProbContainer select:hover {
+#selectProbContainer select:hover, #backwardSelectProbContainer select:hover {
     border: 1px solid #adb1b4;
 }
 
