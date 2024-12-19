@@ -1,39 +1,45 @@
 const existingNodes = [];
 var totalNodeCount = 0;
 
-let envNode = new BNNode(1, "Môi trường", ["ẩm ướt", "khô ráo"], false, []);
-existingNodes.push(envNode);
-totalNodeCount++;
+function testCase1() {
+    let envNode = new BNNode(1, "Môi trường", ["ẩm ướt", "khô ráo"], false, []);
+    existingNodes.push(envNode);
+    totalNodeCount++;
 
-let exposureNode = new BNNode(2, "Tiếp xúc mầm bệnh", ["có", "không", "không biết"], false, [1]);
-existingNodes.push(exposureNode);
-totalNodeCount++;
+    let exposureNode = new BNNode(2, "Tiếp xúc mầm bệnh", ["có", "không", "không biết"], false, [1]);
+    existingNodes.push(exposureNode);
+    totalNodeCount++;
 
-let immunityNode = new BNNode(3, "Miễn dịch", ["tốt", "tệ"], false, []);
-existingNodes.push(immunityNode);
-totalNodeCount++;
+    let immunityNode = new BNNode(3, "Miễn dịch", ["tốt", "tệ"], false, []);
+    existingNodes.push(immunityNode);
+    totalNodeCount++;
 
-let diseaseNode = new BNNode(4, "Bị bệnh", ["có", "không", "không biết"], false, [2, 3]);
-existingNodes.push(diseaseNode);
-totalNodeCount++;
+    let diseaseNode = new BNNode(4, "Bị bệnh", ["có", "không", "không biết"], false, [2, 3]);
+    existingNodes.push(diseaseNode);
+    totalNodeCount++;
 
-let feverNode = new BNNode(5, "Sốt", ["có", "không"], true, [4]);
-existingNodes.push(feverNode);
-totalNodeCount++;
+    let feverNode = new BNNode(5, "Sốt", ["có", "không"], true, [4]);
+    existingNodes.push(feverNode);
+    totalNodeCount++;
 
-let coughNode = new BNNode(6, "Ho", ["có", "không"], true, [4]);
-existingNodes.push(coughNode);
-totalNodeCount++;
+    let coughNode = new BNNode(6, "Ho", ["có", "không"], true, [4]);
+    existingNodes.push(coughNode);
+    totalNodeCount++;
 
-let fatigueNode = new BNNode(7, "Mệt mỏi", ["có", "không"], true, [4]);
-existingNodes.push(fatigueNode);
+    let fatigueNode = new BNNode(7, "Mệt mỏi", ["có", "không"], true, [4]);
+    existingNodes.push(fatigueNode);
 
-let diagnosisNode = new BNNode(8, "Chẩn đoán", ["bị bệnh", "không bị bệnh"], false, [4, 5, 6, 7]);
-existingNodes.push(diagnosisNode);
-totalNodeCount++;
+    let diagnosisNode = new BNNode(8, "Chẩn đoán", ["bị bệnh", "không bị bệnh"], false, [4, 5, 6, 7]);
+    existingNodes.push(diagnosisNode);
+    totalNodeCount++;
 
-document.getElementById("nodeDisplayContainer").innerHTML = "";
-existingNodes.forEach(node => node.render());
+    document.getElementById("nodeDisplayContainer").innerHTML = "";
+    existingNodes.forEach(node => node.render());
+}
+
+function testCase2() {
+    
+}
 
 const parentsSelect = document.getElementById("parents");
 const selectedParentsList = document.getElementById("selectedParents");
