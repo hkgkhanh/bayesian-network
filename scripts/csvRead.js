@@ -108,3 +108,76 @@ document.getElementById('csvFileInput').addEventListener('input', function (even
 
     reader.readAsText(file);
 });
+
+
+
+document.getElementById('netInitInput').addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+        const code = event.target.result;
+
+        const lines = code.split("\n");
+        const nodes = [];
+
+        existingNodes = [];
+        totalNodeCount = 0;
+
+        // Tạo danh sách các node
+        let count = 0;
+        for (let i = 0; i < lines.length; i++) {
+            if (lines[i].startsWith("variable")) {
+                const name = lines[i].split(" ")[1];
+                
+                // Đọc dòng tiếp theo để lấy states
+                const statesLine = lines[i + 1];
+                const states = statesLine.match(/\{(.*?)\}/)[1].split(",").map(s => s.trim());
+                
+                count++;
+                nodes.push({ count, name, states, parents: [], children: [] });
+            }
+        }
+
+        // Xác định quan hệ cha con
+        for (const line of lines) {
+            if (line.startsWith("probability")) {
+                const matches = line.match(/probability \( (.*?) \| (.*?) \)/);
+                if (matches) {
+                    const childName = matches[1].trim();
+                    const parentNames = matches[2].trim().split(",").map(s => s.trim());
+
+                    const childNode = nodes.find(node => node.name === childName);
+                    parentNames.forEach(parentName => {
+                        const parentNode = nodes.find(node => node.name === parentName);
+                        if (childNode && parentNode) {
+                        childNode.parents.push(parentNode.count);
+                        parentNode.children.push(childNode.count);
+                        }
+                    });
+                }
+            }
+        }
+
+        console.log(nodes);
+        for (let i = 0; i < nodes.length; i++) {
+            let parentIds = [];
+            for (let j = 0; j < nodes[i].parents.length; j++) {
+                for (let k = 0; k < existingNodes.length; k++) {
+                    if (existingNodes[k].name == nodes[i].parents[j].name) {
+                        parentIds.push(existingNodes[k].id);
+                    }
+                }
+            }
+            existingNodes.push(new BNNode(totalNodeCount + 1, nodes[i].name, nodes[i].states, false, nodes[i].parents));
+            totalNodeCount++;
+        }
+
+        console.log(existingNodes);
+
+        document.getElementById("nodeDisplayContainer").innerHTML = "";
+        existingNodes.forEach(node => node.render());
+    };
+
+    reader.readAsText(file);
+});

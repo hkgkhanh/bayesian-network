@@ -75,7 +75,7 @@ main {
     align-items: center;
     border-radius: 50%;
     cursor: move;
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
     position: absolute;
     user-select: none;

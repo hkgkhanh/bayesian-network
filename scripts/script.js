@@ -1,4 +1,4 @@
-const existingNodes = [];
+let existingNodes = [];
 var totalNodeCount = 0;
 
 function testCase1() {

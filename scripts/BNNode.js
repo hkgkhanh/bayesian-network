@@ -7,9 +7,9 @@ class BNNode {
         this.states = states;
         this.isDynamic = isDynamic;
         this.parentNodes = parents;
-        this.x = 50;
-        this.y = 50;
-        this.d = 70;
+        this.x = 50 + ((id % 10) * 80);
+        this.y = 50 + (Math.floor((id - 1) / 10) * 80);
+        this.d = 40;
     }
 
     render() {
