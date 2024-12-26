@@ -26,6 +26,14 @@ function downloadCSVProcess(filename, csvContent) {
     });
 }
 
+function getAccurateDataNumber() {
+    let dataLine = [];
+    for (let i = 0; i < existingNodes.length; i++) {
+        dataLine.push(Math.floor(Math.random() * existingNodes[i].states.length));
+    }
+    return dataLine;
+}
+
 document.getElementById('csvFileInput').addEventListener('input', function (event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -45,6 +53,7 @@ document.getElementById('csvFileInput').addEventListener('input', function (even
 
         const data = rows.map(row => row.split(',').map(cell => cell.trim()));
         nodesData = data;
+        console.log(nodesData);
 
         let csvNodes = data[0];
         let netNodes = existingNodes.map(node => node.name);
@@ -110,6 +119,7 @@ document.getElementById('csvFileInput').addEventListener('input', function (even
 });
 
 
+/// lấy dữ liệu từ Bayesian benchmark dataset
 
 document.getElementById('netInitInput').addEventListener('change', (event) => {
     const file = event.target.files[0];
@@ -180,4 +190,43 @@ document.getElementById('netInitInput').addEventListener('change', (event) => {
     };
 
     reader.readAsText(file);
+});
+
+document.getElementById('textFileInput').addEventListener('change', (event) => {
+    const file = event.target.files[0]; 
+
+    if (file) {
+        const reader = new FileReader();
+
+        nodesData = [];
+        let headerRow = [];
+        for (let i = 0; i < existingNodes.length; i++) {
+            headerRow.push(existingNodes[i].name);
+        }
+        nodesData.push(headerRow); // hàng đầu tiên là tên node
+
+        reader.onload = (e) => {
+            const fileContent = e.target.result;
+            
+            const lines = fileContent.split("\n");
+
+            for (let i = 0; i < lines.length; i++) {
+                // let dataLine = lines[i].split(/\s+/).map(Number);
+                let dataLine = getAccurateDataNumber();
+
+                let stateLine = [];
+                for (let j = 0; j < dataLine.length; j++) {
+                    stateLine.push(existingNodes[j].states[dataLine[j]]);
+                }
+
+                nodesData.push(stateLine);
+            }
+
+            console.log(nodesData);
+        };
+
+        reader.readAsText(file); 
+    } else {
+        console.log("Không có file nào được chọn.");
+    }
 });
