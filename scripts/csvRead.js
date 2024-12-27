@@ -212,10 +212,12 @@ document.getElementById('textFileInput').addEventListener('change', (event) => {
 
             for (let i = 0; i < lines.length - 1; i++) {
                 let dataLine = lines[i].split(/\s+/).map(Number);
+                dataLine.pop();
+                console.log(dataLine);
                 // let dataLine = getAccurateDataNumber();
 
                 let stateLine = [];
-                for (let j = 0; j < dataLine.length; j++) {
+                for (let j = 0; j < dataLine.length - 1; j++) {
                     stateLine.push(existingNodes[j].states[dataLine[j]]);
                 }
 
