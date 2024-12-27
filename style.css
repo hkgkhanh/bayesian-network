@@ -59,8 +59,9 @@ main {
 
 #nodeDisplayContainer {
     position: relative;
-    width: calc(100% - 500px);
-    height: 600px;
+    width: 900px;
+    height: fit-content;
+    min-height: 600px;
     border: 1px solid #b1b1b1;
     margin: 10px 0;
     left: 350px;

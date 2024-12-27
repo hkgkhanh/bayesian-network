@@ -210,9 +210,9 @@ document.getElementById('textFileInput').addEventListener('change', (event) => {
             
             const lines = fileContent.split("\n");
 
-            for (let i = 0; i < lines.length; i++) {
-                // let dataLine = lines[i].split(/\s+/).map(Number);
-                let dataLine = getAccurateDataNumber();
+            for (let i = 0; i < lines.length - 1; i++) {
+                let dataLine = lines[i].split(/\s+/).map(Number);
+                // let dataLine = getAccurateDataNumber();
 
                 let stateLine = [];
                 for (let j = 0; j < dataLine.length; j++) {
