@@ -210,21 +210,56 @@ document.getElementById('textFileInput').addEventListener('change', (event) => {
             
             const lines = fileContent.split("\n");
 
-            for (let i = 0; i < lines.length - 1; i++) {
+            for (let i = 0; i < lines.length; i++) {
                 let dataLine = lines[i].split(/\s+/).map(Number);
                 dataLine.pop();
-                console.log(dataLine);
+                // console.log(dataLine);
                 // let dataLine = getAccurateDataNumber();
 
                 let stateLine = [];
-                for (let j = 0; j < dataLine.length - 1; j++) {
+                for (let j = 0; j < dataLine.length; j++) {
                     stateLine.push(existingNodes[j].states[dataLine[j]]);
                 }
 
                 nodesData.push(stateLine);
             }
 
-            console.log(nodesData);
+            // console.log(nodesData);
+
+            
+            const table = document.createElement('table');
+            table.style.width = '100%';
+            table.setAttribute('border', '1');
+            table.style.borderCollapse = "collapse";
+
+            const headerRow = table.insertRow();
+            headerRow.appendChild(document.createElement('th'));
+            existingNodes.forEach(cell => {
+                const th = document.createElement('th');
+                th.textContent = cell.name;
+                headerRow.appendChild(th);
+            });
+
+            for (let i = 1; i < nodesData.length; i++) {
+                const row = table.insertRow();
+                let stttd = document.createElement('td');
+                stttd.textContent = i;
+                row.appendChild(stttd);
+                nodesData[i].forEach(cell => {
+                    const td = document.createElement('td');
+                    td.textContent = cell;
+                    row.appendChild(td);
+                });
+            }
+
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = '';
+            outputDiv.style.maxHeight = "300px";
+            outputDiv.style.overflow = "auto";
+            event.target.value = "";
+            outputDiv.appendChild(table);
+
+            document.getElementById("numDatapoint").innerHTML = nodesData.length - 1;
         };
 
         reader.readAsText(file); 
