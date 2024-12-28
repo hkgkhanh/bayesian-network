@@ -26,14 +26,6 @@ function downloadCSVProcess(filename, csvContent) {
     });
 }
 
-function getAccurateDataNumber() {
-    let dataLine = [];
-    for (let i = 0; i < existingNodes.length; i++) {
-        dataLine.push(Math.floor(Math.random() * existingNodes[i].states.length));
-    }
-    return dataLine;
-}
-
 document.getElementById('csvFileInput').addEventListener('input', function (event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -212,12 +204,13 @@ document.getElementById('textFileInput').addEventListener('change', (event) => {
 
             for (let i = 0; i < lines.length; i++) {
                 let dataLine = lines[i].split(/\s+/).map(Number);
-                dataLine.pop();
+                // dataLine.pop();
                 // console.log(dataLine);
-                // let dataLine = getAccurateDataNumber();
+
+                if (dataLine.length == 1) continue;
 
                 let stateLine = [];
-                for (let j = 0; j < dataLine.length; j++) {
+                for (let j = 0; j < existingNodes.length; j++) {
                     stateLine.push(existingNodes[j].states[dataLine[j]]);
                 }
 

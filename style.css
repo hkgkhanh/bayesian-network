@@ -306,8 +306,11 @@ input[type="file"] {
 }
 
 #resultDisplayContainer {
-    width: 60%;
+    width: 90%;
+    height: fit-content;
+    max-height: 90vh;
     overflow: auto;
+    border: 1px solid #bfbfbf;
 }
 
 #resultDisplayContainer table tr:nth-child(even){

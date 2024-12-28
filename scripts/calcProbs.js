@@ -32,6 +32,8 @@ function getProbWithCond(nodeName, nodeState, parentName, parentState) {
         }
     }
 
+    if (numDataPoint == 0) return "divided by 0";
+
     return stateCount / numDataPoint;
 }
 
