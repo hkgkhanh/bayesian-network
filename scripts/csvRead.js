@@ -5,6 +5,15 @@ function convertToCSV(data) {
 }
 
 function downloadCSVProcess(filename, csvContent) {
+    // xóa hết các nút upload cũ nếu có
+    if (document.getElementById("csvTemplate")) {
+        document.getElementById("csvTemplate").parentNode.removeChild(document.getElementById("csvTemplate"));
+    }
+
+    if (document.getElementById("csvTemplate_label")) {
+        document.getElementById("csvTemplate_label").parentNode.removeChild(document.getElementById("csvTemplate_label"));
+    }
+
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
 
@@ -16,7 +25,8 @@ function downloadCSVProcess(filename, csvContent) {
     const label = document.createElement("label");
     label.htmlFor = "csvTemplate";
     label.className = "file-upload";
-    label.innerHTML = "Tải template_data.csv"
+    label.innerHTML = "Tải template_data.csv";
+    label.id = "csvTemplate_label";
     
     document.getElementById("inputDataContainer").insertBefore(label, document.getElementById("csvInputLabel"));
     document.getElementById("inputDataContainer").insertBefore(a, document.getElementById("csvInputLabel")) ;

@@ -158,6 +158,7 @@ class BNNode {
                 nodeData.parentNodes = [...editselectedParents.children].map((li) => parseInt(li.dataset.value));
 
                 editNodeForm.style.display = "none";
+                document.getElementById("addNodeFormContainer").style.display = "inline-block";
                 nodeData.drawArrow();
             };
         });
